@@ -12,7 +12,7 @@ Servo myservoR;
 void setup() {
   Serial.begin(9600);
   pinMode(signalPinL, INPUT);
-  pinMode(signalPinL, INPUT);
+  pinMode(signalPinR, INPUT);
 
   // 2300 = forward | 700 = backward | 1500 = stop
   myservoL.attach(PINL, 700, 2300);
@@ -24,26 +24,26 @@ void loop() {
   if(1 == digitalRead(signalPinL && signalPinR)) {
     myservoL.writeMicroseconds(2300);
     myservoR.writeMicroseconds(2300);
-    delay(200);
+    delay(20);
   
   
   // turn left
   } else if(1 == digitalRead(signalPinL) && 0 == digitalRead(signalPinR)) {
     myservoL.writeMicroseconds(2300);
     myservoR.writeMicroseconds(1500);
-    delay(200);
+    delay(20);
 
   // turn right
-  } else if(1 == digitalRead(signalPinL) && 0 == digitalRead(signalPinR)) {
+  } else if(0 == digitalRead(signalPinL) && 1 == digitalRead(signalPinR)) {
     myservoL.writeMicroseconds(1500);
     myservoR.writeMicroseconds(2300);
-    delay(200);
+    delay(20);
 
   // stop
   } else if(0 == digitalRead(signalPinL) && 0 == digitalRead(signalPinR)) {
     myservoL.writeMicroseconds(1500);
     myservoR.writeMicroseconds(1500);
-    delay(200);
+    delay(20);
   }
 
 }
